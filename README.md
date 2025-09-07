@@ -7,22 +7,22 @@
 ## 適用場景比較
 
 ### 嚴格 Schema 驗證需求
-**推薦順序**：OpenAI = Grok > Gemini > Qwen = Kimi-K2 > DeepSeek
+**推薦順序**：OpenAI = Grok > Gemini > Claude > Qwen = Kimi-K2 > DeepSeek
 
 適合需要精確數據結構驗證的場景，如 API 回應、數據庫記錄等。
 
 ### 開發便利性
-**推薦順序**：DeepSeek > OpenAI = Grok = Gemini > Qwen = Kimi-K2
+**推薦順序**：DeepSeek > Claude > OpenAI = Grok = Gemini > Qwen = Kimi-K2
 
 適合快速原型開發和簡單的結構化輸出需求。
 
 ### 工具調用整合
-**推薦順序**：Qwen = Kimi-K2 > OpenAI > Gemini > Grok > DeepSeek
+**推薦順序**：Qwen = Kimi-K2 > Claude > OpenAI > Gemini > Grok > DeepSeek
 
 適合需要與現有工具系統整合的複雜應用。
 
 ### 成本效益
-**推薦順序**：DeepSeek > Qwen > Kimi-K2 > Gemini > OpenAI > Grok
+**推薦順序**：DeepSeek > Qwen > Kimi-K2 > Claude > Gemini > OpenAI > Grok
 
 適合大規模部署和成本敏感的應用場景。
 
@@ -351,6 +351,7 @@ if json_match:
 - **OpenAI 和 Grok** 提供最嚴格的 Schema 驗證
 - **Qwen 和 Kimi-K2** 通過工具調用實現靈活的結構化輸出
 - **Gemini** 提供多種 Schema 定義方式
+- **Claude** 提供多種實現方法，靈活性最高，支援工具調用、預填充和提示引導
 - **DeepSeek** 以簡單易用為特色，適合快速開發
 
 選擇時應根據具體需求、開發複雜度、成本預算和精確度要求來決定最適合的方案。
