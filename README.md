@@ -4,6 +4,28 @@
 
 本文檔詳細比較了七個主要 AI 服務提供商在結構化 JSON 輸出方面的實現方式、參數配置、Schema 定義和使用複雜度。
 
+## 適用場景比較
+
+### 嚴格 Schema 驗證需求
+**推薦順序**：OpenAI = Grok > Gemini > Qwen = Kimi-K2 > DeepSeek
+
+適合需要精確數據結構驗證的場景，如 API 回應、數據庫記錄等。
+
+### 開發便利性
+**推薦順序**：DeepSeek > OpenAI = Grok = Gemini > Qwen = Kimi-K2
+
+適合快速原型開發和簡單的結構化輸出需求。
+
+### 工具調用整合
+**推薦順序**：Qwen = Kimi-K2 > OpenAI > Gemini > Grok > DeepSeek
+
+適合需要與現有工具系統整合的複雜應用。
+
+### 成本效益
+**推薦順序**：DeepSeek > Qwen > Kimi-K2 > Gemini > OpenAI > Grok
+
+適合大規模部署和成本敏感的應用場景。
+
 ## 對比表格
 
 | 特性             | OpenAI                            | Qwen                       | Grok (XAI)                        | Gemini                                   | Kimi-K2                              | DeepSeek                             | Claude (Anthropic)                   |
@@ -297,26 +319,6 @@ if json_match:
 - **簡單快速實現**：使用預填充方法
 - **複雜多輸出場景**：使用 XML 標籤方法
 - **探索性數據提取**：使用 `additionalProperties: True`
-
-## 適用場景比較
-
-### 嚴格 Schema 驗證需求
-**推薦順序**：OpenAI = Grok > Gemini > Qwen = Kimi-K2 > DeepSeek
-
-適合需要精確數據結構驗證的場景，如 API 回應、數據庫記錄等。
-
-### 開發便利性
-**推薦順序**：DeepSeek > OpenAI = Grok = Gemini > Qwen = Kimi-K2
-
-適合快速原型開發和簡單的結構化輸出需求。
-
-### 工具調用整合
-**推薦順序**：Qwen = Kimi-K2 > OpenAI > Gemini > Grok > DeepSeek
-
-適合需要與現有工具系統整合的複雜應用。
-
-### 成本效益
-**推薦順序**：DeepSeek > Qwen > Kimi-K2 > Gemini > OpenAI > Grok
 
 適合大規模部署和成本敏感的應用場景。
 
