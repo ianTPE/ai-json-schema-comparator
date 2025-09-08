@@ -75,6 +75,13 @@ response = client.chat.completions.create(
 **實現方式**：
 - 主要透過 Function Calling 實現結構化輸出
 - 在工具定義中指定 JSON Schema
+- **Qwen3-Max-Preview** 新增強化的指令遵循和結構化輸出能力
+
+**最新能力提升（Qwen3-Max-Preview）**：
+- 萬億參數規模，顯著提升複雜指令遵循能力
+- 針對 RAG 和工具調用進行專門優化
+- 更可靠的 Schema 驗證和減少幻覺
+- 支援 256K tokens 上下文窗口
 
 **配置範例**：
 ```python
@@ -95,7 +102,7 @@ tools = [{
 }]
 
 response = client.chat.completions.create(
-    model="qwen-max",
+    model="qwen3-max-preview",  # 最新模型
     messages=messages,
     tools=tools,
     tool_choice="auto"
@@ -349,7 +356,7 @@ if json_match:
 不同 AI 服務在結構化 JSON 輸出方面各有特色：
 
 - **OpenAI 和 Grok** 提供最嚴格的 Schema 驗證
-- **Qwen 和 Kimi-K2** 通過工具調用實現靈活的結構化輸出
+- **Qwen 和 Kimi-K2** 通過工具調用實現靈活的結構化輸出，Qwen3-Max-Preview 具備萬億參數規模和增強的 Schema 驗證能力
 - **Gemini** 提供多種 Schema 定義方式
 - **Claude** 提供多種實現方法，靈活性最高，支援工具調用、預填充和提示引導
 - **DeepSeek** 以簡單易用為特色，適合快速開發
