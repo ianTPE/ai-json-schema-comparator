@@ -43,14 +43,18 @@
 ### 1. OpenAI
 
 **實現方式**：
+- 支援兩種 API 方式：
+  - 新的 Responses API：`client.responses.create`（支援 GPT-5、GPT-4o、GPT-4o-mini 等）
+  - 傳統 Chat Completions API：`client.chat.completions.create`（所有模型）
 - 使用 `response_format` 參數結合嚴格的 JSON Schema
 - 支援 `strict: true` 模式進行嚴格驗證
 
 **配置範例**：
 ```python
-response = client.chat.completions.create(
-    model="gpt-4",
-    messages=messages,
+# GPT-5 新的 Responses API
+response = client.responses.create(
+    model="gpt-5",
+    input="您的輸入內容",
     response_format={
         "type": "json_schema",
         "json_schema": {
