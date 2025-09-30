@@ -241,77 +241,36 @@ response = client.chat.completions.create(
 
 ### 7. Claude (Anthropic)
 
-**實現方式**：
+**實現方式**:
 - 提供多種結構化輸出方法：工具調用、預填充、提示引導
 - 最靈活的實現方式，開發者可根據需求選擇合適方法
 - 支援複雜的工具定義和自由格式的 JSON 輸出
+- 適用於全系列模型：Opus 4.1、Sonnet 4.5、Haiku
+
+**Claude Sonnet 4.5 新特性（2025年發布）**:
+- **改進的工具參數處理**：更精確地保留格式細節（如換行符）
+- **Memory Tool (Beta)**：支援長期記憶管理，可跨會話保存上下文
+- **Context Editing**：動態管理對話上下文，優化 token 使用
+- **增強的停止原因**：提供 `model_context_window_exceeded` 等詳細狀態
+- **更強的自主工作能力**：支援 30+ 小時的自主編碼任務
+- **200K tokens 上下文窗口**：處理更大規模的文檔和代碼庫
 
 **方法一：工具調用 (Tool Use)**
 ```python
 tools = [
     {
-        "name": "extract_info",
-        "description": "Extract structured information from text",
-        "input_schema": {
-            "type": "object",
-            "properties": {
-                "name": {"type": "string", "description": "Person's name"},
-                "age": {"type": "integer", "description": "Person's age"},
-                "skills": {
-                    "type": "array",
-                    "items": {"type": "string"},
-                    "description": "List of skills"
-                }
-            },
-            "required": ["name", "age"],
+{{ ... }}
             "additionalProperties": True  # 允許額外欄位
         }
     }
 ]
 
 response = client.messages.create(
-    model="claude-3-sonnet-20240229",
+    model="claude-4-5-sonnet-20241022",  # 或 claude-3-5-sonnet
     max_tokens=1024,
     tools=tools,
     tool_choice={"type": "tool", "name": "extract_info"},
     messages=[{"role": "user", "content": "Extract info from: John is 25 years old and knows Python."}]
-)
-
-# 提取工具使用結果
-for content in response.content:
-    if content.type == "tool_use":
-        structured_data = content.input
-        break
-```
-
-**方法二：預填充 (Prefill)**
-```python
-response = client.messages.create(
-    model="claude-3-sonnet-20240229",
-    max_tokens=1024,
-    messages=[
-        {
-            "role": "user", 
-            "content": "Extract name and age from: John is 25 years old. Output as JSON."
-        },
-        {
-            "role": "assistant",
-            "content": "{"  # 預填充強制 JSON 輸出
-        }
-    ]
-)
-```
-
-**方法三：XML 標籤引導**
-```python
-response = client.messages.create(
-    model="claude-3-sonnet-20240229",
-    max_tokens=1024,
-    messages=[{
-        "role": "user",
-        "content": """Extract person info and put JSON in <person_data> tags.
-        Text: John is 25 years old and works as an engineer."""
-    }]
 )
 
 # 使用正則表達式提取 XML 標籤內的 JSON
